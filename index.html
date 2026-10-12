@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#eaf3ee">
+	<title>Inicio - Mis Sitios Favoritos</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<main>
+		<p class="eyebrow">Marcadores rápidos</p>
+		<h1>Inicio</h1>
+		<p class="intro">Selecciona cualquiera de tus accesos directos guardados para empezar a navegar.</p>
+
+		<div class="toolbar">
+			<button class="add-link" type="button">+ Añadir enlace</button>
+		</div>
+
+		<nav class="links" aria-label="Sitios favoritos">
+			<div class="link-item">
+				<a class="link" href="https://www.google.com/">
+					<span class="icon"><img src="https://www.google.com/s2/favicons?domain=google.com&sz=64" alt="Google" loading="lazy"></span>
+					<span class="name">Google</span><span class="arrow" aria-hidden="true">↗</span>
+				</a>
+				<button class="delete-link" type="button" aria-label="Eliminar Google">✕</button>
+			</div>
+			<div class="link-item">
+				<a class="link" href="https://www.facebook.com/">
+					<span class="icon"><img src="https://www.google.com/s2/favicons?domain=facebook.com&sz=64" alt="Facebook" loading="lazy"></span>
+					<span class="name">Facebook</span><span class="arrow" aria-hidden="true">↗</span>
+				</a>
+				<button class="delete-link" type="button" aria-label="Eliminar Facebook">✕</button>
+			</div>
+			<div class="link-item">
+				<a class="link" href="https://www.youtube.com/">
+					<span class="icon"><img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=64" alt="YouTube" loading="lazy"></span>
+					<span class="name">YouTube</span><span class="arrow" aria-hidden="true">↗</span>
+				</a>
+				<button class="delete-link" type="button" aria-label="Eliminar YouTube">✕</button>
+			</div>
+			<div class="link-item">
+				<a class="link" href="https://github.com/">
+					<span class="icon"><img src="https://www.google.com/s2/favicons?domain=github.com&sz=64" alt="GitHub" loading="lazy"></span>
+					<span class="name">GitHub</span><span class="arrow" aria-hidden="true">↗</span>
+				</a>
+				<button class="delete-link" type="button" aria-label="Eliminar GitHub">✕</button>
+			</div>
+			<div class="link-item">
+				<a class="link" href="https://www.lun.com/">
+					<span class="icon"><img src="https://www.google.com/s2/favicons?domain=lun.com&sz=64" alt="Las Últimas Noticias" loading="lazy"></span>
+					<span class="name">Lun.com</span><span class="arrow" aria-hidden="true">↗</span>
+				</a>
+				<button class="delete-link" type="button" aria-label="Eliminar Lun.com">✕</button>
+			</div>
+			<div class="link-item">
+				<a class="link" href="https://www.chess.com/">
+					<span class="icon"><img src="https://www.google.com/s2/favicons?domain=chess.com&sz=64" alt="Chess.com" loading="lazy"></span>
+					<span class="name">Chess.com</span><span class="arrow" aria-hidden="true">↗</span>
+				</a>
+				<button class="delete-link" type="button" aria-label="Eliminar Chess.com">✕</button>
+			</div>
+			<div class="link-item">
+				<a class="link" href="https://www.netflix.com/">
+					<span class="icon"><img src="https://www.google.com/s2/favicons?domain=netflix.com&sz=64" alt="Netflix" loading="lazy"></span>
+					<span class="name">Netflix</span><span class="arrow" aria-hidden="true">↗</span>
+				</a>
+				<button class="delete-link" type="button" aria-label="Eliminar Netflix">✕</button>
+			</div>
+			<div class="link-item">
+				<a class="link" href="https://www.hbomax.com/">
+					<span class="icon"><img src="https://www.google.com/s2/favicons?domain=hbomax.com&sz=64" alt="Max" loading="lazy"></span>
+					<span class="name">HBO Max</span><span class="arrow" aria-hidden="true">↗</span>
+				</a>
+				<button class="delete-link" type="button" aria-label="Eliminar HBO Max">✕</button>
+			</div>
+			<div class="link-item">
+				<a class="link" href="https://x.com/">
+					<span class="icon"><img src="https://www.google.com/s2/favicons?domain=x.com&sz=64" alt="X" loading="lazy"></span>
+					<span class="name">X.com</span><span class="arrow" aria-hidden="true">↗</span>
+				</a>
+				<button class="delete-link" type="button" aria-label="Eliminar X.com">✕</button>
+			</div>
+			<div class="link-item">
+				<a class="link" href="estudiostdah.html">
+					<span style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" class="icon" aria-hidden="true">EB</span>
+					<span class="name">Estudios Bíblicos TDAH</span><span class="arrow" aria-hidden="true">↗</span>
+				</a>
+				<button class="delete-link" type="button" aria-label="Eliminar Estudios Bíblicos TDAH">✕</button>
+			</div>
+		</nav>
+	</main>
+
+	<script>
+		const linksNav = document.querySelector('.links');
+		const addButton = document.querySelector('.add-link');
+
+		function normalizeUrl(value) {
+			const url = value.trim();
+			if (!url) return '';
+			return /^https?:\/\//i.test(url) ? url : `https://${url}`;
+		}
+
+		function createLinkItem(name, url) {
+			const item = document.createElement('div');
+			item.className = 'link-item';
+
+			const link = document.createElement('a');
+			link.className = 'link';
+			link.href = normalizeUrl(url);
+			link.target = '_blank';
+			link.rel = 'noopener noreferrer';
+
+			const icon = document.createElement('span');
+			icon.className = 'icon';
+			const initials = (name.trim().match(/\b\w/g) || []).slice(0, 2).join('').toUpperCase() || 'N';
+			icon.textContent = initials;
+			icon.setAttribute('aria-hidden', 'true');
+
+			const label = document.createElement('span');
+			label.className = 'name';
+			label.textContent = name.trim();
+
+			const arrow = document.createElement('span');
+			arrow.className = 'arrow';
+			arrow.setAttribute('aria-hidden', 'true');
+			arrow.textContent = '↗';
+
+			link.append(icon, label, arrow);
+
+			const deleteButton = document.createElement('button');
+			deleteButton.className = 'delete-link';
+			deleteButton.type = 'button';
+			deleteButton.setAttribute('aria-label', `Eliminar ${name}`);
+			deleteButton.textContent = '✕';
+
+			item.append(link, deleteButton);
+			return item;
+		}
+
+		addButton.addEventListener('click', () => {
+			const name = window.prompt('Nombre del enlace', 'Nuevo sitio');
+			if (!name || !name.trim()) return;
+
+			const url = window.prompt('URL del enlace', 'https://ejemplo.com');
+			if (!url || !url.trim()) return;
+
+			const normalizedUrl = normalizeUrl(url);
+			if (!normalizedUrl) return;
+
+			linksNav.appendChild(createLinkItem(name.trim(), normalizedUrl));
+		});
+
+		linksNav.addEventListener('click', (event) => {
+			const deleteButton = event.target.closest('.delete-link');
+			if (!deleteButton) return;
+			event.preventDefault();
+			deleteButton.closest('.link-item')?.remove();
+		});
+	</script>
+</body>
+</html>
